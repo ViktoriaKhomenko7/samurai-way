@@ -11,21 +11,21 @@
     /*grid-gap: 10px;*/
 }
 
-.header {
-    grid-area: h;
-    background-color: #85f19b;
-}
+/*.header {*/
+/*    grid-area: h;*/
+/*    background-color: #96B6C5;*/
+/*}*/
 
-.header img {
-    width: 50px;
-}
+/*.header img {*/
+/*    width: 50px;*/
+/*}*/
 
-.nav {
-    grid-area: n;
-    background-color: #fcef8f;
-}
+/*.nav {*/
+/*    grid-area: n;*/
+/*    background-color: #EEE0C9;*/
+/*}*/
 
-.content {
-    grid-area: c;
-    background-color: #95b5fc;
-}
+/*.content {*/
+/*    grid-area: c;*/
+/*    background-color: #ADC4CE;*/
+/*}*/
