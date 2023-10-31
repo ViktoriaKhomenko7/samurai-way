@@ -3,13 +3,17 @@ import './App.css';
 import {Header} from "./components/header/Header";
 import {Navbar} from "./components/navbar/Navbar";
 import {Profile} from "./components/propfile/Profile";
+import {Dialogs} from "./components/dialogs/Dialogs";
 
-const App =() => {
+const App = () => {
     return (
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
-            <Profile/>
+            <div className={"app-wrapper-content"}>
+                <Dialogs/>
+                {/*<Profile/>*/}
+            </div>
         </div>
     );
 }

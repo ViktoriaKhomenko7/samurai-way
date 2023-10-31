@@ -1,5 +1,4 @@
 import React from "react";
-import s from './MyPosts.module.css'
 import {Post} from "./Post";
 
 // type MyPostsPropsType = {
@@ -11,6 +10,8 @@ export const MyPosts = () => {
         <div>
             My posts
             <div>
+                <textarea></textarea>
+                <button>Add post</button>
                 New post
             </div>
             <Post countLikes={20} message="hi, how are you?"/>
