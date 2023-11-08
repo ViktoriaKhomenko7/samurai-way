@@ -3,7 +3,10 @@
     background-color: #EEE0C9;
 }
 
-.item {
+.active {
+    color: #fdfeff;
+}
+
+a {
     text-decoration: none;
-    color: #494949;
 }
