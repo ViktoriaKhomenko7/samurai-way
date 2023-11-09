@@ -1,0 +1,31 @@
+.dialogs {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    border: 1px solid #c0d5fa;
+    border-radius: 10px;
+    background-color: white;
+}
+.dialogsItems {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+.dialogsItems .active {
+    color: #263248;
+    /*background-color: #117070;*/
+}
+.dialog {
+    color: #777778;
+}
+.messages {
+    padding: 10px;
+
+}
+.message {
+    padding: 10px;
+    margin: 10px;
+    background-color: #edeef0;
+    color: #181818;
+    border-radius: 5px;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import {Post} from "./Post";
+import s from "./MyPosts.module.css"
 
 // type MyPostsPropsType = {
 //
@@ -7,7 +8,7 @@ import {Post} from "./Post";
 
 export const MyPosts = () => {
     return (
-        <div>
+        <div className={s.myPosts}>
             My posts
             <div>
                 <textarea></textarea>

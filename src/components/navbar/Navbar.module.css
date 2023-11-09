@@ -1,10 +1,14 @@
 .nav {
     grid-area: n;
-    background-color: #EEE0C9;
+    border-radius: 1px 1px 1px 20px;
 }
-
+.item {
+    color: #777778;
+    font-weight: bold;
+}
 .active {
-    color: #fdfeff;
+    color: #6196bb;
+    font-weight: bold;
 }
 
 a {
