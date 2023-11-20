@@ -2,21 +2,23 @@ import React from "react";
 import {Post} from "./Post";
 import s from "./MyPosts.module.css"
 
-// type MyPostsPropsType = {
-//
-// }
-
 export const MyPosts = () => {
     return (
         <div className={s.myPosts}>
-            My posts
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
                 New post
             </div>
-            <Post countLikes={20} message="hi, how are you?"/>
-            <Post countLikes={17} message="it's my first post"/>
+            <div className={s.posts}>
+                <Post likesCount={20} message="hi, how are you?"/>
+                <Post likesCount={17} message="it's my first post"/>
+            </div>
         </div>
     );
 };

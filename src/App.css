@@ -31,7 +31,7 @@
 /*    background-color: #EEE0C9;*/
 /*}*/
 
-/*.content {*/
-/*    grid-area: c;*/
-/*    background-color: #ADC4CE;*/
-/*}*/
+.content {
+    grid-area: c;
+    background-color: #ADC4CE;
+}

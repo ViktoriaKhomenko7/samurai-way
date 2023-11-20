@@ -7,16 +7,20 @@
     background-color: white;
 }
 .dialogsItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
 }
 .dialogsItems .active {
-    color: #263248;
+    color: #482634;
     /*background-color: #117070;*/
 }
 .dialog {
     color: #777778;
+    padding-top: 20px;
 }
 .messages {
     padding: 10px;
