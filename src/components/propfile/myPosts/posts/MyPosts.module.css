@@ -1,6 +1,9 @@
 .myPosts {
+    margin-top: 10px;
     padding: 10px;
-    border: 1px solid grey;
+    border: 1px solid #cadce8;
+    border-radius: 10px;
+    background: #FFFFFF;
 }
 .posts {
     margin-top: 10px;

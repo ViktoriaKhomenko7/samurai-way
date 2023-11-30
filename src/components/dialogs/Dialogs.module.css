@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
     background-color: white;
     border-radius: 10px;
 }
@@ -20,15 +19,16 @@
 }
 .dialog {
     color: #777778;
-    padding-top: 20px;
+    padding: 10px;
+    margin: 10px;
 }
 .messages {
-    padding: 10px;
-
+    min-width: 600px;
+    margin: 0 auto;
 }
 .message {
     padding: 10px;
-    margin: 10px;
+    margin: 15px;
     background-color: #edeef0;
     color: #181818;
     border-radius: 5px;
