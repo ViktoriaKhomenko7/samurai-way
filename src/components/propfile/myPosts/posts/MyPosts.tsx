@@ -9,10 +9,11 @@ export type postsDataType = {
 }
 export const MyPosts = () => {
 
-    let postsData = [
+    let posts = [
         {id: 1, message: "hi, how are you?", likesCount: 20},
         {id: 2, message: "it's my first post", likesCount: 17}
     ]
+    let postsElements = posts.map(p => <Post id={1} likesCount={p.likesCount} message={p.message}/>)
 
     return (
         <div className={s.myPosts}>
@@ -27,8 +28,7 @@ export const MyPosts = () => {
                 New post
             </div>
             <div className={s.posts}>
-                <Post id={1} likesCount={postsData[0].likesCount} message={postsData[0].message}/>
-                <Post id={2} likesCount={postsData[1].likesCount} message={postsData[1].message}/>
+                {postsElements}
             </div>
         </div>
     );
