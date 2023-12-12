@@ -6,7 +6,7 @@ export const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts id={1} message={"blabla"} likesCount={20}/>
         </div>
     );
 }

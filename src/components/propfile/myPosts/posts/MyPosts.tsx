@@ -2,12 +2,12 @@ import React from "react";
 import {Post} from "./Post";
 import s from "./MyPosts.module.css"
 
-export type postsDataType = {
+export type PostsDataType = {
     id: number
     message: string
     likesCount: number
 }
-export const MyPosts = () => {
+export const MyPosts: React.FC<PostsDataType> = () => {
 
     let posts = [
         {id: 1, message: "hi, how are you?", likesCount: 20},

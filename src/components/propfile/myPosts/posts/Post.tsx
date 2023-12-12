@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Post.module.css'
-import {postsDataType} from "./MyPosts";
+import {PostsDataType} from "./MyPosts";
 
-export const Post = (props: postsDataType) => {
+export const Post = (props: PostsDataType) => {
 
     return (
         <div className={s.item}>
