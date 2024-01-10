@@ -1,19 +1,14 @@
 import React from "react";
-import {Post} from "./Post";
+import {Post, PostsDataType} from "./Post";
 import s from "./MyPosts.module.css"
 
-export type PostsDataType = {
-    id: number
-    message: string
-    likesCount: number
+export type MyPostsPropsType = {
+    posts: PostsDataType[]
 }
-export const MyPosts: React.FC<PostsDataType> = () => {
 
-    let posts = [
-        {id: 1, message: "hi, how are you?", likesCount: 20},
-        {id: 2, message: "it's my first post", likesCount: 17}
-    ]
-    let postsElements = posts.map(p => <Post id={1} likesCount={p.likesCount} message={p.message}/>)
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+
+    let postsElements = props.posts.map(p => <Post id={1} likesCount={p.likesCount} message={p.message}/>)
 
     return (
         <div className={s.myPosts}>
