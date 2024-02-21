@@ -20,14 +20,14 @@ type profilePageType = {
     posts: PostsType[]
 }
 
-// type SidebarType = {
-//
-// }
+type SidebarType = {
+
+}
 
 type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
-    // sidebar: SidebarType
+    sidebar: SidebarType
 }
 
 let state: RootStateType = {
@@ -35,9 +35,7 @@ let state: RootStateType = {
         dialogs: [
             {id: 1, name: 'Mila'},
             {id: 2, name: 'Dima'},
-            {id: 3, name: 'Alex'},
-            {id: 4, name: 'Sasha'},
-            {id: 5, name: 'Masha'}
+            {id: 3, name: 'Alex'}
         ],
         messages: [
             {id: 1, message: "Hello"},
@@ -50,7 +48,20 @@ let state: RootStateType = {
             {id: 1, message: "hi, how are you?", likesCount: 20},
             {id: 2, message: "it's my first post", likesCount: 17}
         ]
+    },
+    sidebar: {
+
     }
 }
+
+export let addPost = (postMessage: any) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.posts.unshift(newPost)
+}
+
 
 export default state;
