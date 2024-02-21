@@ -8,10 +8,11 @@ import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
 import {Dialogs} from "./components/dialogs/Dialogs";
-import state from "./redux/state";
+import state, {RootStateType} from "./redux/state";
 
 
 type AppPropsType = {
+    state: RootStateType
     addPost: (postMessage: any)=>void
 }
 

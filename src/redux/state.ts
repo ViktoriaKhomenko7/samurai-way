@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 type MessagesType = {
     id: number
     message: string
@@ -6,7 +8,7 @@ type DialogsType = {
     id: number
     name: string
 }
-type PostsType = {
+export type PostsType = {
     id: number
     message: string
     likesCount: number
@@ -24,7 +26,7 @@ type SidebarType = {
 
 }
 
-type RootStateType = {
+export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
     sidebar: SidebarType
@@ -54,13 +56,14 @@ let state: RootStateType = {
     }
 }
 
-export let addPost = (postMessage: any) => {
-    let newPost = {
+export let addPost = (postMessage: string) => {
+    let newPost: PostsType = {
         id: 5,
         message: postMessage,
         likesCount: 0
     }
     state.profilePage.posts.unshift(newPost)
+    rerenderEntireTree()
 }
 
 

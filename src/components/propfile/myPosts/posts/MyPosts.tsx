@@ -4,25 +4,25 @@ import s from "./MyPosts.module.css"
 
 export type MyPostsPropsType = {
     posts: PostsDataType[]
-    addPost: (postMessage: any)=>void
+    addPost: (postMessage: string)=>void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post id={1} likesCount={p.likesCount} message={p.message}/>)
     let newPostElement = useRef<HTMLTextAreaElement>(null)
-    let newPost = newPostElement.current?.value
-    let onAddPost = () => {
-        props.addPost(newPost)
-    }
+    // let newPost =
+    // let onAddPost = () => {
+    //     props.addPost(newPostElement.current?.value)
+    //     newPostElement.current?.value = '';
+    // }
     //ИЛИ ТАК:
-    //let newPostEl = useRef<HTMLTextAreaElement>(null)
-    //
-    //     const addPost = () => {
-    //         if (newPostEl.current !== null) {
-    //             alert(newPostEl.current.value)
-    //         }
-    //     }
+        const onAddPost = () => {
+            if (newPostElement.current !== null) {
+                props.addPost(newPostElement.current.value)
+                newPostElement.current.value = ''
+            }
+        }
 
     return (
         <div className={s.myPosts}>
