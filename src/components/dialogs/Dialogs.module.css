@@ -27,9 +27,23 @@
     margin: 0 auto;
 }
 .message {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
     margin: 15px;
     background-color: #edeef0;
     color: #181818;
     border-radius: 5px;
+}
+
+.message img {
+    width: 20px;
+}
+
+.sendTextarea {
+    flex: 1;
+}
+
+.sendButton {
+
 }

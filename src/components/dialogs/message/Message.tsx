@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
 import s from "../Dialogs.module.css";
+import logo from "../../../images/icon-send-mail.png"
 
 export type MessagePropsType = {
     message: string
@@ -14,8 +15,8 @@ export const Message: React.FC<MessagePropsType> = (props) => {
     return (
         // <div className={s.message}>{props.message}</div>
     <div className={s.message}>
-        <textarea ref={newMessage}></textarea>
-        <button onClick={sendButton}>send</button>
+        <textarea className={s.sendTextarea} ref={newMessage}></textarea>
+        <button className={s.sendButton} onClick={sendButton}><img src={logo} alt="img"/></button>
     </div>
     )
 }

@@ -8,12 +8,12 @@ import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
 import {Dialogs} from "./components/dialogs/Dialogs";
-import state, {RootStateType, updateNewPostText} from "./redux/state";
+import state, {RootStateType} from "./redux/state";
 
 
 type AppPropsType = {
     state: RootStateType
-    addPost: ()=>void
+    addPost: (postText: string)=>void
     updateNewPostText: (newText: string)=>void
 }
 
@@ -28,7 +28,6 @@ const App = (props: AppPropsType) => {
                         <Route path="/profile/*" element={<Profile profilePage={props.state.profilePage}
                                                                    addPost={props.addPost}
                                                                    updateNewPostText={props.updateNewPostText}
-
                         />}/>
                         <Route path="/dialogs/*" element={<Dialogs dialogs={state.dialogsPage.dialogs}
                                                                    messages={state.dialogsPage.messages}/>}/>

@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree: (state: RootStateType) => void = () => {
+    console.log('state was changed')
+}
 
 export type MessagesType = {
     id: number
@@ -13,7 +15,6 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-
 export type dialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
@@ -22,11 +23,9 @@ export type profilePageType = {
     posts: PostsType[]
     newPostText: string
 }
-
 export type SidebarType = {
 
 }
-
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
@@ -58,20 +57,27 @@ let state: RootStateType = {
     }
 }
 
-export let addPost = () => {
-    let newPost: PostsType = {
+export const addPost = (postText: string) => {
+    const newPost: PostsType = {
         id: 5,
         message: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.posts.unshift(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree()
+    rerenderEntireTree(state)
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree()
+    rerenderEntireTree(state)
 }
+
+export const subscribe = (observer: (state: RootStateType)=>void) => {
+    //тут нельзя присваивать переменную (let, const,var), тк после отработки функции эта переменная умрет
+    //и когда будет вызов ф-ции в addPost и updateNewPostText - ничего не произойдет
+    rerenderEntireTree = observer; // паттерн наблюдатель
+}
+
 
 export default state;
