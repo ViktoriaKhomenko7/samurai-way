@@ -53,25 +53,30 @@ let store = {
     _callSubscriber(state: RootStateType) {
         console.log('state was changed')
     },
+
     getState() {
         return this._state
     },
-    addPost(postText: string) {
-        const newPost: PostsType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer; // паттерн наблюдатель
+    },
+
+    dispatch(action: any){
+        if(action.type === 'ADD-POST'){
+            // this._addPost()
+            const newPost: PostsType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            //this._updateNewPostText(action.newText)
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     }
 }
 

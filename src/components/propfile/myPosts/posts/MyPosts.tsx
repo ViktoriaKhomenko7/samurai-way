@@ -4,26 +4,26 @@ import s from "./MyPosts.module.css"
 
 export type MyPostsPropsType = {
     posts: PostsDataType[]
-    addPost: (postText: string) => void
     newPostText: string
-    updateNewPostText: (newText: string)=>void
+    dispatch: (action: any) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post key={p.id} id={1} likesCount={p.likesCount} message={p.message}/>)
-    let newPostElement: RefObject<HTMLTextAreaElement>  = useRef(null)
+    let newPostElement: RefObject<HTMLTextAreaElement> = useRef(null)
 
     let onAddPost = () => {
         if (newPostElement.current) {
             let postText = newPostElement.current.value
-            props.addPost(postText)
+            props.dispatch( {type: 'ADD-POST'} )
         }
     }
     let onPostChange = () => {
         if (newPostElement.current) {
-            let newText: string = newPostElement.current.value
-            props.updateNewPostText(newText)
+            let text: string = newPostElement.current.value
+            let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text}
+            props.dispatch(action)
         }
     }
 

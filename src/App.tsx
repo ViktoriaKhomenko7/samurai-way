@@ -14,8 +14,7 @@ import store from "./redux/state";
 
 type AppPropsType = {
     state: RootStateType
-    addPost: (postText: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (postText: string) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -29,9 +28,7 @@ const App = (props: AppPropsType) => {
                     <Route path="/profile/*"
                            element={<Profile
                                profilePage={props.state.profilePage}
-                               addPost={props.addPost}
-                               updateNewPostText={props.updateNewPostText}
-                           />}/>
+                               dispatch={props.dispatch}/>}/>
                     <Route path="/dialogs/*"
                            element={<Dialogs
                                dialogs={store._state.dialogsPage.dialogs}
