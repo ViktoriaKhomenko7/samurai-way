@@ -25,9 +25,30 @@ export type RootStateType = {
     dialogsPage: dialogsPageType
     sidebar: SidebarType
 }
+export type StoreType = {
+    _state: RootStateType
+    _callSubscriber: (state: RootStateType)=>void
+    getState: () => RootStateType
+    subscribe: (observer: (state: RootStateType) => void)=>void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType)=>void
+}
 
+export type ActionsTypes = AddPostActionType
+    | UpdateNewPostTextActionType
 
-let store = {
+export type AddPostActionType = ReturnType<typeof addPostAC>
+// export type AddPostActionType = {
+//     type: 'ADD-POST'
+//     postText: string
+// }
+
+export type UpdateNewPostTextActionType = ReturnType<typeof changePostAC>
+// export type UpdateNewPostTextActionType = {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
+
+let store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [
@@ -50,29 +71,30 @@ let store = {
         },
         sidebar: {}
     },
-    _callSubscriber(state: RootStateType) {
+    _callSubscriber() {
         console.log('state was changed')
     },
 
     getState() {
         return this._state
     },
-    subscribe(observer: (state: RootStateType) => void) {
+    subscribe(observer) {
         this._callSubscriber = observer; // паттерн наблюдатель
     },
 
-    dispatch(action: any){
+    dispatch(action){
         if(action.type === 'ADD-POST'){
             // this._addPost()
             const newPost: PostsType = {
                 id: 5,
-                message: this._state.profilePage.newPostText,
+                message: action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        }
+        else if (action.type === 'UPDATE-NEW-POST-TEXT'){
             //this._updateNewPostText(action.newText)
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
@@ -80,6 +102,18 @@ let store = {
     }
 }
 
+export const addPostAC = (postText: string) => {
+    return {
+        type: 'ADD-POST',
+        postText: postText
+    } as const
+}
+export const changePostAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
+}
 
 // let rerenderEntireTree = (state: RootStateType)  => {
 //     console.log('state was changed')
@@ -126,7 +160,7 @@ let store = {
 //     rerenderEntireTree(state)
 // }
 
-// export const subscribe = (observer: (state: RootStateType)=>void) => {
+// export const subscribe = (observer: ()=>void) => {
 //     //тут нельзя присваивать переменную (let, const,var), тк после отработки функции эта переменная умрет
 //     //и когда будет вызов ф-ции в addPost и updateNewPostText - ничего не произойдет
 //     rerenderEntireTree = observer; // паттерн наблюдатель
