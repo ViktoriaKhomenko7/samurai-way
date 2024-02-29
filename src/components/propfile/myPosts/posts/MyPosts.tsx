@@ -20,13 +20,13 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postsElements = props.posts.map(p => <Post key={p.id} id={1} likesCount={p.likesCount} message={p.message}/>)
     let newPostElement: RefObject<HTMLTextAreaElement> = useRef(null)
 
-    let onAddPost = () => {
+    const onAddPost = () => {
         if (newPostElement.current) {
             //let postText = newPostElement.current.value
             props.dispatch(addPostAC(props.newPostText))
         }
     }
-    let onPostChange = () => {
+    const onPostChange = () => {
         if (newPostElement.current) {
             let text: string = newPostElement.current.value
             //let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text}

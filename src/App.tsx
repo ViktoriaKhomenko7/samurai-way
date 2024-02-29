@@ -13,7 +13,7 @@ import {ActionsTypes, StoreType} from "./redux/state";
 
 type AppPropsType = {
     store: StoreType
-    dispatch: (action: ActionsTypes)=>void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -31,9 +31,9 @@ const App: React.FC<AppPropsType> = (props) => {
                                profilePage={state.profilePage}
                                dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path="/dialogs/*"
-                           element={<Dialogs
-                               dialogs={state.dialogsPage.dialogs}
-                               messages={state.dialogsPage.messages}/>}/>
+                           element={<Dialogs dialogsPage={state.dialogsPage}
+                                             dispatch={props.store.dispatch.bind(props.store)}
+                           />}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>
@@ -44,3 +44,5 @@ const App: React.FC<AppPropsType> = (props) => {
 }
 
 export default App;
+
+//bind связывает диспатч со стором (слева с тем что справа)

@@ -1,3 +1,10 @@
+//actions const
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
+
+//types
 export type MessagesType = {
     id: number
     message: string
@@ -11,43 +18,48 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-export type dialogsPageType = {
+export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
+    newMessageText: string
 }
-export type profilePageType = {
+export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
 }
 export type SidebarType = {}
 export type RootStateType = {
-    profilePage: profilePageType
-    dialogsPage: dialogsPageType
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
 export type StoreType = {
     _state: RootStateType
-    _callSubscriber: (state: RootStateType)=>void
+    _callSubscriber: (state: RootStateType) => void
     getState: () => RootStateType
-    subscribe: (observer: (state: RootStateType) => void)=>void
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType)=>void
+    subscribe: (observer: (state: RootStateType) => void) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
+//actions type
 export type ActionsTypes = AddPostActionType
     | UpdateNewPostTextActionType
-
+    | AddMessageActionType
+    | UpdateMessageActionType
 export type AddPostActionType = ReturnType<typeof addPostAC>
 // export type AddPostActionType = {
 //     type: 'ADD-POST'
 //     postText: string
 // }
-
 export type UpdateNewPostTextActionType = ReturnType<typeof changePostAC>
 // export type UpdateNewPostTextActionType = {
 //     type: 'UPDATE-NEW-POST-TEXT'
 //     newText: string
 // }
+export type UpdateMessageActionType = ReturnType<typeof changeMessageAC>
+export type AddMessageActionType = ReturnType<typeof sendMessageAC>
 
+//store
 let store: StoreType = {
     _state: {
         dialogsPage: {
@@ -61,6 +73,7 @@ let store: StoreType = {
                 {id: 2, message: "How are you?"},
                 {id: 3, message: "Yo"}
             ],
+            newMessageText: ''
         },
         profilePage: {
             posts: [
@@ -74,16 +87,14 @@ let store: StoreType = {
     _callSubscriber() {
         console.log('state was changed')
     },
-
     getState() {
         return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer; // паттерн наблюдатель
     },
-
-    dispatch(action){
-        if(action.type === 'ADD-POST'){
+    dispatch(action) {
+        if (action.type === ADD_POST) {
             // this._addPost()
             const newPost: PostsType = {
                 id: 5,
@@ -93,15 +104,24 @@ let store: StoreType = {
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT'){
-            //this._updateNewPostText(action.newText)
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.newMessageText = ''
+            this._state.dialogsPage.messages.push({id: 4, message: body})
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE) {
+            this._state.dialogsPage.newMessageText = action.body
             this._callSubscriber(this._state)
         }
     }
 }
 
+//functions action creator
+
+//posts
 export const addPostAC = (postText: string) => {
     return {
         type: 'ADD-POST',
@@ -114,6 +134,20 @@ export const changePostAC = (newText: string) => {
         newText: newText
     } as const
 }
+
+//messages
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND-MESSAGE',
+    } as const
+}
+export const changeMessageAC = (messageBody: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE',
+        body: messageBody
+    } as const
+}
+
 
 // let rerenderEntireTree = (state: RootStateType)  => {
 //     console.log('state was changed')
