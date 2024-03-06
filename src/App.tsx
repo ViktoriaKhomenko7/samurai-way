@@ -8,16 +8,17 @@ import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
 import {Dialogs} from "./components/dialogs/Dialogs";
-import {ActionsTypes, StoreType} from "./redux/state";
+import {ActionsTypes} from "./redux/store";
+import {ReduxStoreType} from "./redux/redux-store";
 
 
 type AppPropsType = {
-    store: StoreType
+    store: ReduxStoreType
     dispatch: (action: ActionsTypes) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
-
+debugger
     const state = props.store.getState();
 
     return (
