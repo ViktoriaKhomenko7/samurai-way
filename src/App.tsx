@@ -7,9 +7,9 @@ import {Profile} from "./components/propfile/Profile";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
-import {Dialogs} from "./components/dialogs/Dialogs";
 import {ActionsTypes} from "./redux/store";
 import {ReduxStoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -18,8 +18,6 @@ type AppPropsType = {
 }
 
 const App: React.FC<AppPropsType> = (props) => {
-debugger
-    const state = props.store.getState();
 
     return (
         <div className="app-wrapper">
@@ -28,12 +26,9 @@ debugger
             <div className={"app-wrapper-content"}>
                 <Routes>
                     <Route path="/profile/*"
-                           element={<Profile
-                               profilePage={state.profilePage}
-                               dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                           element={<Profile store={props.store}/>}/>
                     <Route path="/dialogs/*"
-                           element={<Dialogs dialogsPage={state.dialogsPage}
-                                             dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                           element={<DialogsContainer store={props.store}/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>
