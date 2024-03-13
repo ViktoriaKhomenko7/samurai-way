@@ -7,18 +7,10 @@ import {Profile} from "./components/propfile/Profile";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
-import {ActionsTypes} from "./redux/store";
-import {ReduxStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 
 
-type AppPropsType = {
-    // store: ReduxStoreType
-    // dispatch: (action: ActionsTypes) => void
-}
-
-const App: React.FC<AppPropsType> = (props) => {
-
+const App = () => {
     return (
         <div className="app-wrapper">
             <Header/>

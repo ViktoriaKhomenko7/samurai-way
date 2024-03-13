@@ -1,15 +1,16 @@
 import React, {RefObject, useRef} from "react";
-import {Post, PostsDataType} from "./Post";
+import {Post} from "./Post";
 import s from "./MyPosts.module.css"
+import {MyPostsContainerPropsType} from "./MyPostsContainer";
 
-export type MyPostsPropsType = {
-    posts: PostsDataType[]
-    newPostText: string
-    updateNewPostText: (postText: string)=> void
-    addPost: ()=>void
-}
+// export type MyPostsPropsType = {
+//     posts: PostsDataType[]
+//     newPostText: string
+//     updateNewPostText: (postText: string)=> void
+//     addPost: ()=>void
+// }
 
-export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsContainerPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post key={p.id} id={1} likesCount={p.likesCount} message={p.message}/>)
     let newPostElement: RefObject<HTMLTextAreaElement> = useRef(null)
@@ -18,7 +19,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         if (newPostElement.current) {
             //let postText = newPostElement.current.value
             //props.dispatch(addPostAC(props.newPostText))
-            props.addPost()
+            props.addPost(props.newPostText)
         }
     }
     const onPostChange = () => {

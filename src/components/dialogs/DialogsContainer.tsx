@@ -1,35 +1,52 @@
 import React from 'react';
-import {changeMessageAC, sendMessageAC} from "../../redux/dialogs-reducer";
-import {ReduxStoreType} from "../../redux/redux-store";
+import {changeMessageAC, DialogsPageType, sendMessageAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
-import {StoreType} from "../../redux/store";
+import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
-export type DialogsContainerPropsType = {
-    // store: ReduxStoreType
+export type DialogsContainerPropsType = MapStatePropsType & mapDispatchToPropsType
+
+type MapStatePropsType = {
+    dialogsPage: DialogsPageType
+}
+type mapDispatchToPropsType = {
+    changeMessage: (messageBody: string) => void
+    sendMessage: () => void
 }
 
-export const DialogsContainer: React.FC<DialogsContainerPropsType> = (props) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+}
 
-    return <StoreContext.Consumer>
-        {
-            store => {
-                let state = store.getState().dialogsPage
-                const onSendButtonClick = () => {
-                    store.dispatch(sendMessageAC())
-                }
-                const onChangeNewMessageText = (messageBody: string) => {
-                    store.dispatch(changeMessageAC(messageBody))
-                }
-                return (
-                    <Dialogs changeMessage={onChangeNewMessageText}
-                             sendMessage={onSendButtonClick}
-                             dialogsPage={state}/>
-                )
-            }
-        }
-    </StoreContext.Consumer>
-};
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        changeMessage: (messageBody: string) => {
+            dispatch(changeMessageAC(messageBody))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageAC())
+        },
+    }
+}
+
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
+
+//как работает функция connect: она создает контейнерную компоненту
+//внутри этой контейнерной компоненты она рендерит презентационную компоненту
+//и внутрь презентационной компоненты в качестве пропсов (атрибутов)
+//передает те свойства, которые сидят в этих двух объектах
+
+//() () это значит, что мы вызвали ф-цию connect, а она вернула нам другую функцию
+//и мы вызываем ту функцию, которую вернул нам предыдущий вызов
+//connect создает контейнерную компоненту вокруг Dialogs чтобы снабдить ее данными
+//этим мы Dialogs "законнектили к стору"
+//
+
+
 
 
 //import React from 'react';

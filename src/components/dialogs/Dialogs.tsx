@@ -2,15 +2,15 @@ import React, {ChangeEvent} from 'react';
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./dialogsItem/DialogsItem";
 import {Message} from "./message/Message";
-import {DialogsPageType} from "../../redux/store";
+import {DialogsContainerPropsType} from "./DialogsContainer";
 
-export type DialogsPropsType = {
-    dialogsPage: DialogsPageType
-    sendMessage: ()=>void
-    changeMessage: (messageBody: string)=>void
-}
+// export type DialogsPropsType = {
+//     dialogsPage: DialogsPageType
+//     sendMessage: ()=>void
+//     changeMessage: (messageBody: string)=>void
+// }
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const Dialogs: React.FC<DialogsContainerPropsType> = (props) => {
 
     let state = props.dialogsPage
 
@@ -24,6 +24,12 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     const onSendButtonClick = () => {
         props.sendMessage()
     }
+
+    // const onKeyDownHandler = (e) => {
+    //     if(e.key === 13) {
+    //         onSendButtonClick()
+    //     }
+    // }
     const onChangeNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let messageBody = e.currentTarget.value
         props.changeMessage(messageBody)
