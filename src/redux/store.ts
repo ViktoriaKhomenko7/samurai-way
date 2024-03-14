@@ -26,7 +26,6 @@ type PostsType = {
     likesCount: number
 }
 
-
 export type SidebarType = {}
 export type RootStateType = {
     profilePage: ProfilePageType
